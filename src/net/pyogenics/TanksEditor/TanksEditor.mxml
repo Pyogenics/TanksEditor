@@ -1,11 +1,21 @@
 <?xml version="1.0"?> 
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
     xmlns:mx="library://ns.adobe.com/flex/mx" 
-    xmlns:s="library://ns.adobe.com/flex/spark"> 
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    menu="{nativeMenu}"> 
     <s:layout> 
         <s:VerticalLayout/>
     </s:layout>
  
+
+    <!-- Script -->
+    <fx:Script>
+    <![CDATA[
+
+    ]]>
+    </fx:Script>
+
+    <!-- Main view -->
     <s:HGroup>
         <s:ToggleButton content="Snapping" buttonMode="true"/>
         <s:ToggleButton content="Show collision" buttonMode="true"/>
@@ -25,4 +35,36 @@
         </mx:VDividedBox>
     </mx:HDividedBox>
 
+    <!-- Declarations -->
+    <fx:Declarations>
+        <!-- Native menu -->
+        <fx:XML format="e4x" id="nativeMenuData">
+            <root>
+                <menuitem label="File">
+                    <menuitem label="New map" shiftKey="false" controlKey="true" keyEquivalent="N"/>
+                    <menuitem label="Import map" shiftKey="false" controlKey="true" keyEquivalent="I"/>
+                    <menuitem label="Export map" shiftKey="false" controlKey="true" keyEquivalent="T"/>
+                    <menuitem type="separator"/>
+                    <menuitem label="Load library" shiftKey="false" controlKey="true" keyEquivalent="L"/>
+                </menuitem>
+                <menuitem label="Edit">
+                    <menuitem label="Undo" shiftKey="false" controlKey="true" keyEquivalent="Z"/>
+                    <menuitem label="Redo" shiftKey="false" controlKey="true" keyEquivalent="Y"/>
+                    <menuitem label="Select all" shiftKey="false" controlKey="true" keyEquivalent="A"/>
+                </menuitem>
+                <menuitem label="View">
+                    <menuitem label="Show visual geometry" type="check" toggled="true"/>
+                    <menuitem label="Show collision geometry" type="check"/>
+                    <menuitem type="separator"/>
+                    <menuitem label="Show grid" type="check" toggled="true"/>
+                    <menuitem label="Show bounding boxes" type="check"/>
+                </menuitem>
+                <menuitem label="Help">
+                    <menuitem label="Show help"/>
+                    <menuitem label="About TanksEditor"/>
+                </menuitem>
+            </root>
+        </fx:XML>
+        <mx:FlexNativeMenu dataProvider="{nativeMenuData}" id="nativeMenu" showRoot="false" labelField="@label" keyEquivalentField="@keyEquivalent"/>
+    </fx:Declarations>
 </s:WindowedApplication>
