@@ -1,0 +1,10 @@
+{
+    "config": "air",
+    "compilerOptions": {
+        "source-path": ["src", "external/Alternativa3D/src"],
+        "output": "build/TanksEditor.swf",
+        "library-path": ["external/Alternativa3D/libs"],
+    },
+    "mainClass": "net.pyogenics.TanksEditor.TanksEditor",
+    "application": "TanksEditor-app.xml"
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application 
+	xmlns="http://ns.adobe.com/air/application/51.1"
+	minimumPatchLevel="0">
+<!-- AIR Application Descriptor File. See https://airsdk.dev/docs/building/application-descriptor-files/introduction -->
+	<id>net.pyogenics.tankseditor</id>
+	<name>TanksEditor</name>
+    <versionNumber>1.0.0</versionNumber>
+    <versionLabel>dev1</versionLabel>
+	<filename>TanksEditor</filename>
+	<description>
+		<text xml:lang="en">Map editor for Tanki Online</text>
+	</description>
+	<copyright>Copyright 2024, Pyogenics, https://www.github.com/Pyogenics</copyright>
+	<initialWindow>
+		<content>build/TanksEditor.swf</content>
+		<title>TanksEditor</title>
+		<systemChrome>standard</systemChrome>
+		<transparent>false</transparent>
+		<minimizable>true</minimizable>
+		<maximizable>true</maximizable>
+		<resizable>true</resizable>
+		<width>1280</width>
+		<height>720</height>
+		<renderMode>gpu</renderMode>
+		<fullscreen>false</fullscreen>
+		<visible>true</visible>
+	</initialWindow>
+</application>
