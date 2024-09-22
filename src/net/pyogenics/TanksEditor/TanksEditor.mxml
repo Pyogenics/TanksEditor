@@ -3,7 +3,8 @@
     xmlns:mx="library://ns.adobe.com/flex/mx" 
     xmlns:s="library://ns.adobe.com/flex/spark"
     menu="{nativeMenu}"
-    creationComplete="onCreationComplete();"> 
+    creationComplete="onCreationComplete();"
+    backgroundAlpha="0"> 
     <s:layout> 
         <s:VerticalLayout/>
     </s:layout>
@@ -17,8 +18,12 @@ import net.pyogenics.TanksEditor.AboutMenu;
 import mx.events.CloseEvent;
 import flash.events.Event;
 import mx.events.ItemClickEvent;
+import net.pyogenics.TanksEditor.Scene3D;
+import flash.display.Stage3D;
 
 private var aboutMenu:AboutMenu;
+private var workspace3DView:Scene3D;
+private var stage3D:Stage3D;
 
 private function onCreationComplete():void
 {
@@ -29,6 +34,27 @@ private function onCreationComplete():void
     
     // native menu
     nativeMenu.addEventListener(ItemClickEvent.ITEM_CLICK, showAbout);
+
+    // Start 3D views
+    workspace3DView = new Scene3D();
+    workspace3DView.percentHeight = 100;
+    workspace3DView.percentWidth = 100;
+    workspace.addElement(workspace3DView);
+    
+    addEventListener(Event.ADDED_TO_STAGE, init)
+}
+
+private function init(event:Event):void
+{
+    stage3D = stage.stage3Ds[0];
+    stage3D.addEventListener(Event.CONTEXT3D_CREATE, onContext3DCreated);
+    stage3D.requestContext3D();
+}
+
+private function onContext3DCreated(event:Event):void
+{
+    trace("Context created");
+    workspace3DView.run(stage3D);
 }
 
 private function closeAbout(event:Event):void
@@ -53,8 +79,8 @@ private function showAbout(event:Event):void
         <s:ToggleButton content="Hide selection" buttonMode="true"/>
         <s:ToggleButton content="Show all" buttonMode="true"/>
     </s:HGroup>
-    <mx:HDividedBox percentHeight="100" percentWidth="100">
-        <s:Panel title="Workspace" percentHeight="100" percentWidth="70"> </s:Panel>
+    <mx:HDividedBox percentHeight="100" percentWidth="100" backgroundAlpha="0">
+        <s:Panel title="Workspace" percentHeight="100" percentWidth="70" id="workspace" backgroundAlpha="0"> </s:Panel>
         <mx:VDividedBox percentHeight="100" percentWidth="30">
             <s:Panel title="Preview" percentHeight="30" percentWidth="100"></s:Panel>
             <s:VGroup percentHeight="70" percentWidth="100">
