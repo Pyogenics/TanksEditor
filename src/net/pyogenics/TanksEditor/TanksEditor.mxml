@@ -2,7 +2,8 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
     xmlns:mx="library://ns.adobe.com/flex/mx" 
     xmlns:s="library://ns.adobe.com/flex/spark"
-    menu="{nativeMenu}"> 
+    menu="{nativeMenu}"
+    creationComplete="onCreationComplete();"> 
     <s:layout> 
         <s:VerticalLayout/>
     </s:layout>
@@ -11,7 +12,35 @@
     <!-- Script -->
     <fx:Script>
     <![CDATA[
+import mx.managers.PopUpManager;
+import net.pyogenics.TanksEditor.AboutMenu;
+import mx.events.CloseEvent;
+import flash.events.Event;
+import mx.events.ItemClickEvent;
 
+private var aboutMenu:AboutMenu;
+
+private function onCreationComplete():void
+{
+    trace("Application created!");
+
+    aboutMenu = new AboutMenu();
+    aboutMenu.addEventListener(CloseEvent.CLOSE, closeAbout);
+    
+    // native menu
+    nativeMenu.addEventListener(ItemClickEvent.ITEM_CLICK, showAbout);
+}
+
+private function closeAbout(event:Event):void
+{
+    PopUpManager.removePopUp(aboutMenu);
+}
+
+private function showAbout(event:Event):void
+{
+    PopUpManager.addPopUp(aboutMenu, this);
+    PopUpManager.centerPopUp(aboutMenu);
+}
     ]]>
     </fx:Script>
 
@@ -61,7 +90,7 @@
                 </menuitem>
                 <menuitem label="Help">
                     <menuitem label="Show help"/>
-                    <menuitem label="About TanksEditor"/>
+                    <menuitem label="About TanksEditor" itemClick="showAbout();"/>
                 </menuitem>
             </root>
         </fx:XML>
